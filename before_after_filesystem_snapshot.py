@@ -1,6 +1,8 @@
 def before_after_snapshot(before_dict, after_dict):
-  '''before_after_snapshot is a simple function that outputs which files were
-    unchanged, modified, added or removed after a step was carried out.'''
+  '''before_after_snapshot is a simple function that returns which files were
+    unchanged, modified, added or removed from an input dictionary (before_dict)
+    and an output dictionary (after_dict). Both these dictionaries have file
+    names as the keys and their hashes as the values.'''
 
   unchanged_files = []
   modified_files = []
@@ -21,17 +23,17 @@ def before_after_snapshot(before_dict, after_dict):
       added_files.append(key)
 
   # Returning the snapshot of the new file system
-  print('unchanged = ', str(unchanged_files))
-  print('modified = ', str(modified_files))
-  print('added = ', str(added_files))
-  print('removed = ', str(removed_files))
+  return'unchanged = ' + str(unchanged_files) + '\n' + \
+        'modified = ' + str(modified_files) + '\n' + \
+        'added = ' + str(added_files) + '\n' + \
+        'removed = ' + str(removed_files)
 
 # Test code:
 before = {
-'one.tgz': '1234567890abcdef',
-'foo/two.tgz': '0000001111112222',
-'three.txt': '1111222233334444',
-'bar/bat/four.tgz': '6677889900112233'
+  'one.tgz': '1234567890abcdef',
+  'foo/two.tgz': '0000001111112222',
+  'three.txt': '1111222233334444',
+  'bar/bat/four.tgz': '6677889900112233'
 }
 
 after = {
