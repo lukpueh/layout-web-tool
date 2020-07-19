@@ -1,4 +1,4 @@
-def before_after_snapshot(before_dict, after_dict):
+def snapshot(before_dict, after_dict):
   '''before_after_snapshot is a simple function that returns which files were
     unchanged, modified, added or removed from an input dictionary (before_dict)
     and an output dictionary (after_dict). Both these dictionaries have file
@@ -27,21 +27,3 @@ def before_after_snapshot(before_dict, after_dict):
         'modified = ' + str(modified_files) + '\n' + \
         'added = ' + str(added_files) + '\n' + \
         'removed = ' + str(removed_files)
-
-# Test code:
-before = {
-  'one.tgz': '1234567890abcdef',
-  'foo/two.tgz': '0000001111112222',
-  'three.txt': '1111222233334444',
-  'bar/bat/four.tgz': '6677889900112233'
-}
-
-after = {
-  'five.txt': '5555555555555555',
-  'one.tgz': '1234567890abcdef',
-  'foo/two.tgz': 'ffffffffffffffff',
-  'bar/bat/four.tgz': '6677889900112233',
-  'baz/six.tgz': '6666666666666666'
-}
-
-before_after_snapshot(before, after)
