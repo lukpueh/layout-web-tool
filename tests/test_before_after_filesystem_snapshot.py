@@ -1,5 +1,5 @@
 import unittest
-import layout_web_tool.before_after_filesystem_snapshot
+import before_after_filesystem_snapshot
 
 class Test_before_after_filesystem_snapshot(unittest.TestCase):
 
@@ -69,3 +69,6 @@ class Test_before_after_filesystem_snapshot(unittest.TestCase):
 
     snapshot = before_after_filesystem_snapshot.snapshot(Test_before_after_filesystem_snapshot.before, after)
     self.assertEqual(snapshot, "unchanged = ['one.tgz']\nmodified = ['foo/two.tgz', 'bar/bat/four.tgz']\nadded = ['five.txt', 'baz/six.tgz']\nremoved = ['three.txt']")
+
+if __name__ == "__main__":
+    unittest.main()
