@@ -23,7 +23,7 @@ class Test_before_after_filesystem_snapshot(unittest.TestCase):
     }
 
     snapshot = before_after_filesystem_snapshot.snapshot(Test_before_after_filesystem_snapshot.before, after)
-    self.assertEqual(snapshot, "unchanged = ['bar/bat/four.tgz', 'foo/two.tgz', 'one.tgz', 'three.txt']\nmodified = []\nadded = []\nremoved = []")
+    self.assertEqual(snapshot, (['bar/bat/four.tgz', 'foo/two.tgz', 'one.tgz', 'three.txt'], [], [], []))
 
 
   def test_empty_filesystem_snapshot(self):
@@ -31,7 +31,7 @@ class Test_before_after_filesystem_snapshot(unittest.TestCase):
     after = {}
 
     snapshot = before_after_filesystem_snapshot.snapshot(Test_before_after_filesystem_snapshot.before, after)
-    self.assertEqual(snapshot, "unchanged = []\nmodified = []\nadded = []\nremoved = ['bar/bat/four.tgz', 'foo/two.tgz', 'one.tgz', 'three.txt']")
+    self.assertEqual(snapshot, ([], [], [], ['bar/bat/four.tgz', 'foo/two.tgz', 'one.tgz', 'three.txt']))
 
 
   def test_new_filesystem_snapshot(self):
@@ -42,7 +42,7 @@ class Test_before_after_filesystem_snapshot(unittest.TestCase):
     }
 
     snapshot = before_after_filesystem_snapshot.snapshot(Test_before_after_filesystem_snapshot.before, after)
-    self.assertEqual(snapshot, "unchanged = []\nmodified = []\nadded = ['five.tgz', 'foo/bar/six.tgz', 'foofoo/seven.txt']\nremoved = ['bar/bat/four.tgz', 'foo/two.tgz', 'one.tgz', 'three.txt']")
+    self.assertEqual(snapshot, ([], [], ['five.tgz', 'foo/bar/six.tgz', 'foofoo/seven.txt'], ['bar/bat/four.tgz', 'foo/two.tgz', 'one.tgz', 'three.txt']))
 
 
   def test_fully_modified_filesystem_snapshot(self):
@@ -55,7 +55,7 @@ class Test_before_after_filesystem_snapshot(unittest.TestCase):
     }
 
     snapshot = before_after_filesystem_snapshot.snapshot(Test_before_after_filesystem_snapshot.before, after)
-    self.assertEqual(snapshot, "unchanged = []\nmodified = ['bar/bat/four.tgz', 'foo/two.tgz', 'one.tgz', 'three.txt']\nadded = []\nremoved = []")
+    self.assertEqual(snapshot, ([], ['bar/bat/four.tgz', 'foo/two.tgz', 'one.tgz', 'three.txt'], [], []))
 
   def test_partially_modified_filesystem_snapshot(self):
 
@@ -68,4 +68,4 @@ class Test_before_after_filesystem_snapshot(unittest.TestCase):
     }
 
     snapshot = before_after_filesystem_snapshot.snapshot(Test_before_after_filesystem_snapshot.before, after)
-    self.assertEqual(snapshot, "unchanged = ['one.tgz']\nmodified = ['bar/bat/four.tgz', 'foo/two.tgz']\nadded = ['baz/six.tgz', 'five.txt']\nremoved = ['three.txt']")
+    self.assertEqual(snapshot, (['one.tgz'], ['bar/bat/four.tgz', 'foo/two.tgz'], ['baz/six.tgz', 'five.txt'], ['three.txt']))
