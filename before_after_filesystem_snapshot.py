@@ -23,7 +23,7 @@ def snapshot(before_dict, after_dict):
       added_files.append(key)
 
   # Returning the snapshot of the new file system
-  return'unchanged = ' + str(unchanged_files) + '\n' + \
-        'modified = ' + str(modified_files) + '\n' + \
-        'added = ' + str(added_files) + '\n' + \
-        'removed = ' + str(removed_files)
+  return'unchanged = ' + str(sorted(unchanged_files)) + '\n' + \
+        'modified = ' + str(sorted(modified_files)) + '\n' + \
+        'added = ' + str(sorted(added_files)) + '\n' + \
+        'removed = ' + str(sorted(removed_files))
