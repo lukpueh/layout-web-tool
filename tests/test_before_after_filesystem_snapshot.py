@@ -23,7 +23,8 @@ class Test_before_after_filesystem_snapshot(unittest.TestCase):
     }
 
     snapshot = before_after_filesystem_snapshot.snapshot(Test_before_after_filesystem_snapshot.before, after)
-    self.assertEqual(snapshot, (['bar/bat/four.tgz', 'foo/two.tgz', 'one.tgz', 'three.txt'], [], [], []))
+    self.assertEqual(snapshot, (['bar/bat/four.tgz', 'foo/two.tgz', 'one.tgz',
+      'three.txt'], [], [], []))
 
 
   def test_empty_filesystem_snapshot(self):
@@ -31,7 +32,8 @@ class Test_before_after_filesystem_snapshot(unittest.TestCase):
     after = {}
 
     snapshot = before_after_filesystem_snapshot.snapshot(Test_before_after_filesystem_snapshot.before, after)
-    self.assertEqual(snapshot, ([], [], [], ['bar/bat/four.tgz', 'foo/two.tgz', 'one.tgz', 'three.txt']))
+    self.assertEqual(snapshot, ([], [], [], ['bar/bat/four.tgz', 'foo/two.tgz',
+      'one.tgz', 'three.txt']))
 
 
   def test_new_filesystem_snapshot(self):
@@ -42,7 +44,9 @@ class Test_before_after_filesystem_snapshot(unittest.TestCase):
     }
 
     snapshot = before_after_filesystem_snapshot.snapshot(Test_before_after_filesystem_snapshot.before, after)
-    self.assertEqual(snapshot, ([], [], ['five.tgz', 'foo/bar/six.tgz', 'foofoo/seven.txt'], ['bar/bat/four.tgz', 'foo/two.tgz', 'one.tgz', 'three.txt']))
+    self.assertEqual(snapshot, ([], [], ['five.tgz', 'foo/bar/six.tgz',
+      'foofoo/seven.txt'], ['bar/bat/four.tgz', 'foo/two.tgz', 'one.tgz',
+      'three.txt']))
 
 
   def test_fully_modified_filesystem_snapshot(self):
@@ -55,7 +59,9 @@ class Test_before_after_filesystem_snapshot(unittest.TestCase):
     }
 
     snapshot = before_after_filesystem_snapshot.snapshot(Test_before_after_filesystem_snapshot.before, after)
-    self.assertEqual(snapshot, ([], ['bar/bat/four.tgz', 'foo/two.tgz', 'one.tgz', 'three.txt'], [], []))
+    self.assertEqual(snapshot, ([], ['bar/bat/four.tgz', 'foo/two.tgz',
+      'one.tgz', 'three.txt'], [], []))
+
 
   def test_partially_modified_filesystem_snapshot(self):
 
@@ -68,4 +74,5 @@ class Test_before_after_filesystem_snapshot(unittest.TestCase):
     }
 
     snapshot = before_after_filesystem_snapshot.snapshot(Test_before_after_filesystem_snapshot.before, after)
-    self.assertEqual(snapshot, (['one.tgz'], ['bar/bat/four.tgz', 'foo/two.tgz'], ['baz/six.tgz', 'five.txt'], ['three.txt']))
+    self.assertEqual(snapshot, (['one.tgz'], ['bar/bat/four.tgz',
+      'foo/two.tgz'], ['baz/six.tgz', 'five.txt'], ['three.txt']))
