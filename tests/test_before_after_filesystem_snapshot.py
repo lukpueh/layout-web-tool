@@ -76,3 +76,6 @@ class Test_before_after_filesystem_snapshot(unittest.TestCase):
     snapshot = before_after_filesystem_snapshot.snapshot(Test_before_after_filesystem_snapshot.before, after)
     self.assertEqual(snapshot, (['one.tgz'], ['bar/bat/four.tgz',
       'foo/two.tgz'], ['baz/six.tgz', 'five.txt'], ['three.txt']))
+
+  if __name__ == '__main__':
+    unittest.main()
