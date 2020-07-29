@@ -77,5 +77,37 @@ class Test_before_after_filesystem_snapshot(unittest.TestCase):
     self.assertEqual(snapshot, (['one.tgz'], ['bar/bat/four.tgz',
       'foo/two.tgz'], ['baz/six.tgz', 'five.txt'], ['three.txt']))
 
+  def test_generate_artifact_rules(self):
+
+    after = {
+      'five.txt': '5555555555555555',
+      'one.tgz': '1234567890abcdef',
+      'foo/two.tgz': 'ffffffffffffffff',
+      'bar/bat/four.tgz': '6677889900112233',
+      'baz/six.tgz': '6666666666666666'
+    }
+
+    artifact_rules = {
+      'expected_materials': [
+        ['ALLOW', 'one.tgz'],
+        ['ALLOW', 'bar/bat/four.tgz'],
+        ['ALLOW', 'foo/two.tgz'],
+        ['ALLOW', 'three.txt'],
+        ['DISALLOW', '*']
+      ],
+      'expected_products': [
+        ['ALLOW', 'one.tgz'],
+        ['ALLOW', 'bar/bat/four.tgz'],
+        ['MODIFY', 'foo/two.tgz'],
+        ['CREATE', 'five.txt'],
+        ['CREATE', 'baz/six.tgz'],
+        ['DELETE', 'three.txt'],
+        ['DISALLOW', '*']
+      ]
+    }
+    snapshot = before_after_filesystem_snapshot.snapshot(self.before, after)
+    rules = before_after_filesystem_snapshot.generate_artifact_rules(snapshot)
+    self.assertEqual(sorted(artifact_rules), rules)
+
   if __name__ == '__main__':
     unittest.main()
