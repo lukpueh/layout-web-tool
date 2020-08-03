@@ -93,6 +93,7 @@ class Test_before_after_filesystem_snapshot(unittest.TestCase):
         ['ALLOW', 'bar/bat/four.tgz'],
         ['ALLOW', 'foo/two.tgz'],
         ['ALLOW', 'three.txt'],
+        ['DELETE', 'three.txt'],
         ['DISALLOW', '*']
       ],
       'expected_products': [
@@ -101,13 +102,12 @@ class Test_before_after_filesystem_snapshot(unittest.TestCase):
         ['MODIFY', 'foo/two.tgz'],
         ['CREATE', 'five.txt'],
         ['CREATE', 'baz/six.tgz'],
-        ['DELETE', 'three.txt'],
         ['DISALLOW', '*']
       ]
     }
     snapshot = before_after_filesystem_snapshot.snapshot(self.before, after)
     rules = before_after_filesystem_snapshot.generate_artifact_rules(snapshot)
-    self.assertEqual(sorted(artifact_rules), rules)
+    self.assertEqual(sorted(artifact_rules), sorted(rules))
 
   if __name__ == '__main__':
     unittest.main()
