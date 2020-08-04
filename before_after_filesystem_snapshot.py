@@ -42,9 +42,9 @@ def generate_artifact_rules(snapshot):
   for file in snapshot[1]:
     # modified files
     expected_materials.append(["ALLOW", file])
-  for file in snapshot[2]:
-    # added files
-    expected_materials.append(["CREATE", file])
+  for file in snapshot[3]:
+    # removed files
+    expected_materials.append(["DELETE", file])
   expected_materials.append(["DISALLOW", "*"])
 
   for file in snapshot[0]:
@@ -53,9 +53,9 @@ def generate_artifact_rules(snapshot):
   for file in snapshot[1]:
     # modified files
     expected_products.append(["MODIFY", file])
-  for file in snapshot[3]:
-    # removed files
-    expected_products.append(["DELETE", file])
+  for file in snapshot[2]:
+    # added files
+    expected_products.append(["CREATE", file])
   expected_products.append(["DISALLOW", "*"])
 
   return {

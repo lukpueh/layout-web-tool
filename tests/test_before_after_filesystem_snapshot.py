@@ -89,25 +89,25 @@ class Test_before_after_filesystem_snapshot(unittest.TestCase):
 
     artifact_rules = {
       'expected_materials': [
-        ['ALLOW', 'one.tgz'],
         ['ALLOW', 'bar/bat/four.tgz'],
+        ['ALLOW', 'one.tgz'],
         ['ALLOW', 'foo/two.tgz'],
-        ['ALLOW', 'three.txt'],
         ['DELETE', 'three.txt'],
         ['DISALLOW', '*']
       ],
       'expected_products': [
-        ['ALLOW', 'one.tgz'],
         ['ALLOW', 'bar/bat/four.tgz'],
+        ['ALLOW', 'one.tgz'],
         ['MODIFY', 'foo/two.tgz'],
-        ['CREATE', 'five.txt'],
         ['CREATE', 'baz/six.tgz'],
+        ['CREATE', 'five.txt'],
         ['DISALLOW', '*']
       ]
     }
+
     snapshot = before_after_filesystem_snapshot.snapshot(self.before, after)
     rules = before_after_filesystem_snapshot.generate_artifact_rules(snapshot)
-    self.assertEqual(sorted(artifact_rules), sorted(rules))
+    self.assertDictEqual(artifact_rules, rules)
 
   if __name__ == '__main__':
     unittest.main()
